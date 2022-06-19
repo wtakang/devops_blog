@@ -20,16 +20,17 @@ Remember to dump the database before you start.
 12. Run the migrations with: docker-compose exec web python manage.py migrate --noinput
 13. Run the shell with: docker-compose exec web python manage.py shell
 14. Run these two lines one at a time: "from django.contrib.contenttypes.models import ContentType", "ContentType.objects.all().delete()"
-15. Add gunicorn to the requirements.txt file if its not already there.
-16. Create a folder for nginx at the root of your project. This should be at the same level as your docker-compose.yml file. create two files in that folder: Dockerfile and nginx.conf
-17. Add the config for nginx to the docker-conpose file
-18. Add the nginx config to the Dockerfile in the nginx directory … also add the nginx config to the nginx.conf file
-19. Change the port for the web app to Expose. In the docker-compose file this has already been done.  
-20. Run it again … you should be able to access the app on port 1337 now 
-21. Now if you try to access the admin of this site you will notice that it has no formatting … so lets fix that 
-22. Add the config for static files to the settings.py file
-23. Add volumes for the static files to web and nginx sections of the docker compose file
-24. Add the alias for the nginx config … 
-25. Run the build again … 
-26. That is it … now there a few things that you do additionally but because our app is not complete you can google it when you get to that 
+15. now load the data from the json file that we dumped earlier. run "python manage.py loaddata data.json"
+16. Add gunicorn to the requirements.txt file if its not already there.
+17. Create a folder for nginx at the root of your project. This should be at the same level as your docker-compose.yml file. create two files in that folder: Dockerfile and nginx.conf
+18. Add the config for nginx to the docker-conpose file
+19. Add the nginx config to the Dockerfile in the nginx directory … also add the nginx config to the nginx.conf file
+20. Change the port for the web app to Expose. In the docker-compose file this has already been done.  
+21. Run it again … you should be able to access the app on port 1337 now 
+22. Now if you try to access the admin of this site you will notice that it has no formatting … so lets fix that 
+23. Add the config for static files to the settings.py file
+24. Add volumes for the static files to web and nginx sections of the docker compose file
+25. Add the alias for the nginx config … 
+26. Run the build again … 
+27. That is it … now there a few things that you do additionally but because our app is not complete you can google it when you get to that 
 
