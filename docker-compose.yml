@@ -1,0 +1,35 @@
+version: "3.7"
+
+services:
+  web:
+    build: ./devsecops_blog
+    #command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn devsecops_blog.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - ./devsecops_blog/:/home/production/devops_blog
+      - static_volume:/home/production/devops_blog/staticfiles
+    expose:
+      - 8000
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+  db:
+    image: postgres:13.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=willy
+      - POSTGRES_PASSWORD=a_difficult_password
+      - POSTGRES_DB=devsecops_blog_db
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/home/production/devops_blog/staticfiles
+    ports:
+      - 1337:80
+    depends_on:
+      - web
+volumes:
+  postgres_data:
+  static_volume:
